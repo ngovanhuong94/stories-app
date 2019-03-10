@@ -1,6 +1,7 @@
 // add modules
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 // add graphql modules
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
@@ -21,6 +22,9 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 const app = express()
 
 const PORT = process.env.PORT || 5000
+
+// allow client connect to server
+app.use(cors())
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
 	schema
