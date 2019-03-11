@@ -18,20 +18,6 @@ const userSchema = new Schema({
 	}
 })
 
-// add middleware to mongoose schema
-userSchema.pre('save', function (next) {
-	// hash user password before save
-	if (this.password && !this.isModified('password')) {
-		const salt = bcrypt.genSalt(10, function (err, salt) {
-			bcrypt.hash(this.password, salt, function (err, hash) {
-				this.password = hash
-				next();
-			})
-		})
-	} else {
-		next()
-	}
-	
-})
+
 
 module.exports = mongoose.model('User', userSchema)
