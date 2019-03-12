@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { SIGNUP_USER } from '../../queries'
 import { Mutation } from 'react-apollo'
 import Error from '../Error'
@@ -45,6 +46,9 @@ class Signup extends Component {
 								const {data} = await signupUser({ variables: { username, password, email }})
 								// save token to local storage
 								localStorage.setItem('token', data.signupUser.token)
+								// reload current user data
+								await this.props.refetch()
+								this.props.history.push('/')
 								// clear current state
 								this.setState({ email: '', password: '', password2: '', username: ''})
 							} catch (err) {
@@ -95,4 +99,4 @@ class Signup extends Component {
 	}
 }
 
-export default Signup
+export default withRouter(Signup)

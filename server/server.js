@@ -39,7 +39,6 @@ const server = new ApolloServer({
 		const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
 		let currentUser
 		if (token && token !== null) {
-			console.log(token)
 			const currentUser = await jwt.verify(token, process.env.SECRET)
 			return {
 				currentUser,

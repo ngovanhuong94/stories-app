@@ -9,7 +9,7 @@ exports.typeDefs = `
 	}
 
 	type Query {
-		getCurrentUser: String!
+		getCurrentUser: User!
 	}
 
 	type Mutation {
