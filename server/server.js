@@ -4,10 +4,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-
+const jwt = require('jsonwebtoken')
 // add graphql modules
-const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
-const { makeExecutableSchema } = require('graphql-tools')
+const { ApolloServer } = require('apollo-server-express')
 const { typeDefs } = require('./schema')
 const { resolvers } = require('./resolvers')
 
@@ -23,7 +22,7 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
 	.catch((err) => console.log(err))
 
 
-const schema = makeExecutableSchema({ typeDefs, resolvers })
+
 
 const app = express()
 
@@ -32,29 +31,29 @@ const PORT = process.env.PORT || 5000
 // allow client connect to server
 app.use(cors())
 
-// add middlewate to check header request
-app.use(async (req, res, next) => {
-	const token = req.headers.authorization
 
-	if (token && token !== null) {
-		try {
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	context: async ({ req }) => {
+		const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
+		let currentUser
+		if (token && token !== null) {
+			console.log(token)
 			const currentUser = await jwt.verify(token, process.env.SECRET)
-			req.currentUser = currentUser
-		} catch (err) {
-			console.log(err)
+			return {
+				currentUser,
+				User
+			}
+		} else {
+			return {
+				User
+			}
 		}
 	}
-
-	return next()
 })
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({
-	schema
-}))
-
-app.use('/graphiql', graphiqlExpress({
-	endpointURL: '/graphql'
-}))
+server.applyMiddleware({ app })
 
 // run server
 app.listen(PORT, 

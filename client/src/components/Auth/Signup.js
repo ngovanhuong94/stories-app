@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { SIGNUP_USER } from '../../queries'
 import { Mutation } from 'react-apollo'
+import Error from '../Error'
 
 class Signup extends Component {
 	constructor (props) {
@@ -85,6 +86,7 @@ class Signup extends Component {
 						>
 							Submit
 						</button>
+						{ error ? <Error message={error.message.split(':')[1]}/> : ''}
 					</form>	
 				)}
 				</Mutation>

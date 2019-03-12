@@ -4,7 +4,10 @@ const bcrypt = require('bcryptjs')
 
 exports.resolvers = {
 	Query: {
-		hello: () => 'Hello World'
+		getCurrentUser: async (root, args, { currentUser }) => {
+			console.log(currentUser)
+			return 'Hello'
+		}
 	},
 	Mutation: {
 		signupUser: async (root, { username, password, email }, context) => {
