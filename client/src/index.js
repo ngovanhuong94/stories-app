@@ -8,14 +8,35 @@ import Home from './components/Home';
 import Signin from './components/Auth/Signin'
 import Signup from './components/Auth/Signup'
 
-import ApolloClient from 'apollo-boost'
+// apollo modules
+import { ApolloClient } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { setContext } from 'apollo-link-context'
 
 import * as serviceWorker from './serviceWorker';
 
+const httpLink = createHttpLink({
+	uri: 'http://localhost:5000/graphql'
+})
+
+// set context to request header
+const authLink = setContext((_, { headers }) => {
+	const token = localStorage.getItem('token')
+
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `Bearer ${token}` : ''
+		}
+	}
+})
+
 // create apollo client
 const client = new ApolloClient({
-	uri: 'http://localhost:5000/graphql'
+	link: httpLink,
+	cache: new InMemoryCache()
 })
 
 

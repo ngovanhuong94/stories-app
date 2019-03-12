@@ -1280,6 +1280,13 @@ apollo-client@^2.5.1:
     tslib "^1.9.3"
     zen-observable "^0.8.0"
 
+apollo-link-context@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.15.tgz#9e5dc3eb874b3ed975f0bb0062a65aa946fd30a2"
+  dependencies:
+    apollo-link "^1.2.9"
+    tslib "^1.9.3"
+
 apollo-link-dedup@^1.0.0:
   version "1.0.16"
   resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.16.tgz#7d1a883329ca04edf925746b5a46f72bdd0c96b6"
