@@ -48,9 +48,11 @@ class Signup extends Component {
 								localStorage.setItem('token', data.signupUser.token)
 								// reload current user data
 								await this.props.refetch()
-								this.props.history.push('/')
 								// clear current state
 								this.setState({ email: '', password: '', password2: '', username: ''})
+								// redirect to home page
+								this.props.history.push('/')
+	
 							} catch (err) {
 								console.log(err)
 							}

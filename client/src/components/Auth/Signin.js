@@ -18,7 +18,13 @@ class Signin extends Component {
 		const { username, password } = this.state
 		return (
 			<div className="App">
-				<form className="form">
+				<form 
+					className="form" 
+					onSubmit={(e) => { 
+							e.preventDefault()
+							console.log('Submited')
+					}}
+				>
 					<h2>Sign In</h2>
 					<input 
 						type="text"
@@ -34,7 +40,7 @@ class Signin extends Component {
 						value={password}
 						onChange={this.handleChange}
 					/>
-					<button>
+					<button type="submit">
 						Submit
 					</button>
 				</form>
