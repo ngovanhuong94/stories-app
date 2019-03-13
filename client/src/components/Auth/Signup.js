@@ -24,7 +24,7 @@ class Signup extends Component {
 	validateForm () {
 		// check required inputs
 		const { username, email, password, password2 } = this.state
-		return !username || !email || !password || !password2 || password2 !== password2
+		return !username || !email || !password || !password2 || (password2 !== password)
 	}
 
 	render () {
