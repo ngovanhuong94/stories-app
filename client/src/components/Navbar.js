@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import Signout from './Auth/Signout'
 
 const GuessNavbar = () => (
 	<ul className="topnav">
@@ -32,7 +32,7 @@ const AuthNavbar = () => (
 			<NavLink to="/profile">Profile</NavLink>
 		</li>
 		<li className="right">
-			<NavLink to="/#">Logout</NavLink>
+			<Signout />
 		</li>
 	</ul>
 )
