@@ -4,9 +4,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './index.css';
 import Navbar from './components/Navbar'
 
+// pages
 import Home from './components/Home';
 import Signin from './components/Auth/Signin'
 import Signup from './components/Auth/Signup'
+import AddStory from './components/Story/AddStory'
 
 // wrapper session to check currentUser
 import withSession from './components/withSession'
@@ -52,6 +54,7 @@ const Root = ({ session, refetch }) => (
 				<Route exact path="/" component={Home} />
 				<Route path="/signin" render={() => <Signin refetch={refetch}/>} />
 				<Route path="/signup" render={() => <Signup refetch={refetch}/>} />
+				<Route path="/add-story" component={AddStory} />
 			</Switch>
 		</Fragment>
 	</BrowserRouter>

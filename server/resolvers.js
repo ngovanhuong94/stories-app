@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs')
 exports.resolvers = {
 	Query: {
 		getCurrentUser: async (root, args, { currentUser, User }) => {
+			// check empty currentUser
+			if (!currentUser) {
+				return null
+			}
 			const user = await User.findOne({ username: currentUser.username })
 			return user 
 		}
