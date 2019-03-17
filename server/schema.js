@@ -27,7 +27,7 @@ exports.typeDefs = `
 			title: String!
 			imageUrl: String!
 			description: String!
-			category: String
+			category: String!
 			text: String!
 		): Story
 		signupUser(username: String!, password: String!, email: String!): Token!

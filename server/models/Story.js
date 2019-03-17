@@ -9,7 +9,7 @@ const storySchema = new Schema({
 	},
 	category: {
 		type: String,
-		default: 'no category'
+		required: true
 	},
 	imageUrl: {
 		type: String,
