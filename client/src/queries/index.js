@@ -27,19 +27,25 @@ export const GET_CURRENT_USER = gql`
 
 
 export const ADD_STORY = gql`
-	mutation addStory(
+	mutation addStoryMutation(
 					$title: String!, 
-					$category: String!, 
+					$category: String, 
 					$description: String!,
 					$text: String!,
 					$imageUrl: String!
 				) {
-		title
-		description
-		imageUrl
-		text
-		author
-		createdAt
-		likes
+		addStory (	title: $title,
+					description: $description,
+					text: $text,
+					imageUrl: $imageUrl,
+					category: $category ) {
+			title
+			description
+			imageUrl
+			category
+			text
+			author
+			createdAt
+		}
 	}
 `

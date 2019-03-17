@@ -28,23 +28,16 @@ class AddStory extends Component {
 	}
 
 	handleChangeText(e) {
+		// change the text editor
 		this.setState({ text: e.editor.getData() })
 	}
 
-	handleSubmit (e, addStory) {
+	async handleSubmit (e, addStory) {
 		e.preventDefault()
-
-		const { title, description, imageUrl, category, text } = this.state
-
-		addStory({
-			variables: {
-				title,
-				description,
-				imageUrl,
-				category,
-				text
-			}
-		})
+		// run the mutation
+		const { data } = await addStory()
+		// show data to console
+		console.log(data)
 	}
 
 	render () {
@@ -53,6 +46,7 @@ class AddStory extends Component {
 			<div className="App">
 				<Mutation
 					mutation={ADD_STORY}
+					variables={{...this.state}}
 				>
 				{(addStory, { data, loading, error }) => (
 
@@ -81,6 +75,7 @@ class AddStory extends Component {
 							value={category}
 							onChange={this.handleChange}
 						>
+							<option>Chose here category</option>
 							<option value="category1">Category 1</option>
 							<option value="category2">Category 2</option>
 							<option value="category3">Category 3</option>
