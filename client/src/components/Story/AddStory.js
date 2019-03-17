@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CKEditor from 'react-ckeditor-component'
+import withAuth from '../withAuth'
+
 
 class AddStory extends Component {
 	constructor (props) {
@@ -95,4 +97,4 @@ class AddStory extends Component {
 }
 
 
-export default AddStory
+export default withAuth(session => session && session.getCurrentUser)(AddStory)

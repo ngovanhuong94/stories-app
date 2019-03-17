@@ -12,7 +12,7 @@ const { resolvers } = require('./resolvers')
 
 // mongoose models
 const User = require('./models/User')
-
+const Story = require('./models/Story')
 // config environment
 dotenv.config()
 
@@ -42,11 +42,13 @@ const server = new ApolloServer({
 			const currentUser = await jwt.verify(token, process.env.SECRET)
 			return {
 				currentUser,
-				User
+				User,
+				Story
 			}
 		} else {
 			return {
-				User
+				User,
+				Story
 			}
 		}
 	}
