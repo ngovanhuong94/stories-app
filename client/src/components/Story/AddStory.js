@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import CKEditor from 'react-ckeditor-component'
-import withAuth from '../withAuth'
+import { Mutation } from 'react-apollo'
 
+import withAuth from '../withAuth'
+import { ADD_STORY } from '../../queries'
+import Error from '../Error'
 
 class AddStory extends Component {
 	constructor (props) {
@@ -28,69 +31,80 @@ class AddStory extends Component {
 		this.setState({ text: e.editor.getData() })
 	}
 
-	handleSubmit (e) {
+	handleSubmit (e, addStory) {
 		e.preventDefault()
 
-		const storyData = {
-			title: this.state.title,
-			imageUrl: this.state.imageUrl,
-			description: this.state.description,
-			category: this.state.category,
-			text: this.state.text
-		}
+		const { title, description, imageUrl, category, text } = this.state
 
-		console.log(storyData)
+		addStory({
+			variables: {
+				title,
+				description,
+				imageUrl,
+				category,
+				text
+			}
+		})
 	}
 
 	render () {
 		const { title, description, imageUrl, category, text } = this.state
 		return (
 			<div className="App">
-				<form 
-					className="form"
-					onSubmit={this.handleSubmit}
+				<Mutation
+					mutation={ADD_STORY}
 				>
-					<h2>Add Story</h2>
-					<input 
-						type="text"
-						placeholder="Title"
-						name="title"
-						value={title}
-						onChange={this.handleChange}
-					/>
-					<input
-						type="text"
-						placeholder="ImageUrl"
-						name="imageUrl"
-						value={imageUrl}
-						onChange={this.handleChange}
-					/>
-					<select
-						name="category"
-						value={category}
-						onChange={this.handleChange}
+				{(addStory, { data, loading, error }) => (
+
+
+					<form 
+						className="form"
+						onSubmit={(e) => this.handleSubmit(e, addStory)}
 					>
-						<option value="category1">Category 1</option>
-						<option value="category2">Category 2</option>
-						<option value="category3">Category 3</option>
-					</select>
-					<textarea 
-						type="text"
-						placeholder="description"
-						name="description"
-						value={description}
-						onChange={this.handleChange}
-					/>
-					<CKEditor
-						content={text} 
-						events={{
-							"change": this.handleChangeText
-						}}
-					/>
-					<button type="submit">
-						Submit
-					</button>
-				</form>
+						<h2>Add Story</h2>
+						<input 
+							type="text"
+							placeholder="Title"
+							name="title"
+							value={title}
+							onChange={this.handleChange}
+						/>
+						<input
+							type="text"
+							placeholder="ImageUrl"
+							name="imageUrl"
+							value={imageUrl}
+							onChange={this.handleChange}
+						/>
+						<select
+							name="category"
+							value={category}
+							onChange={this.handleChange}
+						>
+							<option value="category1">Category 1</option>
+							<option value="category2">Category 2</option>
+							<option value="category3">Category 3</option>
+						</select>
+						<textarea 
+							type="text"
+							placeholder="description"
+							name="description"
+							value={description}
+							onChange={this.handleChange}
+						/>
+						<CKEditor
+							content={text} 
+							events={{
+								"change": this.handleChangeText
+							}}
+						/>
+						<button type="submit">
+							Submit
+						</button>
+						{ error ? <Error message={error.message}/> : ''}
+					</form>
+					)}
+				</Mutation>
 			</div>
 		)
 	}

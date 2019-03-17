@@ -14,6 +14,7 @@ const storySchema = new Schema({
 	imageUrl: {
 		type: String,
 		required: true,
+		default: "https://res.cloudinary.com/dzlwpwzr9/image/upload/v1522347891/Santorini_hwczai.jpg"
 	},
 	description: {
 		type: String,

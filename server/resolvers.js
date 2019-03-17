@@ -13,6 +13,27 @@ exports.resolvers = {
 		}
 	},
 	Mutation: {
+		addStory: async (root, { title, 
+								imageUrl,
+								description, 
+								text, 
+								category 
+							}, { currentUser, Story }) => {
+			if (!currentUser) {
+				throw new Error('Unauthorized')
+			}
+	
+			const newStory = await new Story({
+				title,
+				description,
+				text,
+				imageUrl,
+				category,
+				author: currentUser.username
+			}).save()
+
+			return newStory
+		},
 		signupUser: async (root, { username, password, email }, { User }) => {
 			// find user with username
 			const user = await User.findOne({ username })

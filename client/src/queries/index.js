@@ -24,3 +24,22 @@ export const GET_CURRENT_USER = gql`
 		}
 	}
 `
+
+
+export const ADD_STORY = gql`
+	mutation addStory(
+					$title: String!, 
+					$category: String!, 
+					$description: String!,
+					$text: String!,
+					$imageUrl: String!
+				) {
+		title
+		description
+		imageUrl
+		text
+		author
+		createdAt
+		likes
+	}
+`
