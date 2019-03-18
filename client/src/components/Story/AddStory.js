@@ -21,6 +21,7 @@ class AddStory extends Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChangeText = this.handleChangeText.bind(this)
+		this.handleValidateForm = this.handleValidateForm.bind(this)
 	}
 
 	handleChange (e) {
@@ -38,6 +39,12 @@ class AddStory extends Component {
 		const { data } = await addStory()
 		// show data to console
 		console.log(data)
+	}
+
+	handleValidateForm () {
+		// required fields
+		const { title, description, imageUrl, category, text } = this.state
+		return !title || !description || !imageUrl || !category || !text
 	}
 
 	render () {
@@ -93,7 +100,10 @@ class AddStory extends Component {
 								"change": this.handleChangeText
 							}}
 						/>
-						<button type="submit">
+						<button 
+							type="submit"
+							disabled={loading || this.handleValidateForm()}
+						>
 							Submit
 						</button>
 						{ error ? <Error message={error.message}/> : ''}

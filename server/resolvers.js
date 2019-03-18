@@ -10,6 +10,29 @@ exports.resolvers = {
 			}
 			const user = await User.findOne({ username: currentUser.username })
 			return user 
+		},
+		getFeed: async (root, { cursor }, { Story }) => {
+			// stories per page
+			const limit = 5
+			let stories = []
+
+			if (cursor) {
+				stories = await Story.find({ _id: { $lt: cursor }})
+									.sort({ createdAt: -1 })
+									.limit(limit)
+									.exec()
+			} else {
+				stories = await Story.find({})
+									.sort({ createdAt: -1 })
+									.limit(limit)
+									.exec()
+			}
+			// cursor is length -1 element
+			cursor = stories[stories.length -1].id
+			return {
+				cursor,
+				stories
+			}
 		}
 	},
 	Mutation: {

@@ -29,7 +29,7 @@ export const GET_CURRENT_USER = gql`
 export const ADD_STORY = gql`
 	mutation addStoryMutation(
 					$title: String!, 
-					$category: String, 
+					$category: String!, 
 					$description: String!,
 					$text: String!,
 					$imageUrl: String!
@@ -46,6 +46,21 @@ export const ADD_STORY = gql`
 			text
 			author
 			createdAt
+		}
+	}
+`
+
+export const GET_FEED = gql`
+	query getFeedQuery ($cursor: String) {
+		getFeed (cursor: $cursor) {
+			cursor
+			stories {
+				id
+				title
+				imageUrl
+				category
+				author
+			}
 		}
 	}
 `

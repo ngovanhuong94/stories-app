@@ -5,6 +5,7 @@ exports.typeDefs = `
 	}
 
 	type Story {
+		id: ID!
 		title: String!
 		imageUrl: String!
 		description: String!
@@ -14,12 +15,19 @@ exports.typeDefs = `
 		text: String!
 		likes: Int!
 	}	
+
 	type Token {
 		token: String!
 	}
 
+	type Feed {
+		cursor: String!
+		stories: [Story]
+	}
+
 	type Query {
 		getCurrentUser: User
+		getFeed(cursor: String): Feed
 	}
 
 	type Mutation {
