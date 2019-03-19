@@ -31,10 +31,10 @@ const Home = () => (
 											return {
 												getFeed: {
 													cursor: fetchMoreResult.getFeed.cursor,
-													stories: {
+													stories: [
 														...previousResult.getFeed.stories,
-														...fetchMoreResult.getFeed.story
-													},
+														...fetchMoreResult.getFeed.stories
+													],
 													__typename: 'Feed'
 												}
 											}

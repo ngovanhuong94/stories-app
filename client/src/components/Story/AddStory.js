@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import CKEditor from 'react-ckeditor-component'
 import { Mutation } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 import withAuth from '../withAuth'
-import { ADD_STORY } from '../../queries'
+import { ADD_STORY, GET_FEED } from '../../queries'
 import Error from '../Error'
 
 class AddStory extends Component {
@@ -37,8 +38,8 @@ class AddStory extends Component {
 		e.preventDefault()
 		// run the mutation
 		const { data } = await addStory()
-		// show data to console
-		console.log(data)
+		// redirect to home page
+		this.props.history.push('/')
 	}
 
 	handleValidateForm () {
@@ -54,6 +55,22 @@ class AddStory extends Component {
 				<Mutation
 					mutation={ADD_STORY}
 					variables={{...this.state}}
+					updateQuery={(InMemoryCache, {data: { addStory }}) => {
+						const { getFeed } = InMemoryCache.readQuery({ query: GET_FEED })
+
+						const stories = getFeed.stories
+						const newStories = [addStory, ...stories]
+
+						InMemoryCache.writeQuery({
+							query: GET_FEED,
+							data: {
+								getFeed: {
+									...getFeed,
+									stories: newStories
+								}
+							}
+						})
+					}}
 				>
 				{(addStory, { data, loading, error }) => (
 
@@ -116,4 +133,4 @@ class AddStory extends Component {
 }
 
 
-export default withAuth(session => session && session.getCurrentUser)(AddStory)
+export default withAuth(session => session && session.getCurrentUser)(withRouter(AddStory))

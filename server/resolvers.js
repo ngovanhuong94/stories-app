@@ -13,6 +13,7 @@ exports.resolvers = {
 		},
 		getFeed: async (root, { cursor }, { Story }) => {
 			// stories per page
+
 			const limit = 5
 			let stories = []
 
@@ -28,7 +29,7 @@ exports.resolvers = {
 									.exec()
 			}
 			// cursor is length -1 element
-			cursor = stories[stories.length -1].id
+			cursor = stories.length > 0 ? stories[stories.length -1].id : cursor
 			return {
 				cursor,
 				stories
