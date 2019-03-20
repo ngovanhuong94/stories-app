@@ -97,6 +97,7 @@ button {
 	margin-top: 7px;
 	margin-bottom: 0;
 	border-radius: 0;
+	text-decoration: none;
 }
 
 .center {
@@ -104,6 +105,17 @@ button {
 }
 
 
+.story {
+	width: 600px;
+	margin: auto;
+	margin-bottom: 50px;
+}
+.heart-icon {
+	color: red;
+}
+.story-text { 
+	text-align: left;
+}
 @media screen and (max-width: 600px) {
 	ul.topnav li.right,
 	ul.topnav li { float: none; }

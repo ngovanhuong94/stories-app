@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 import './index.css';
 import Navbar from './components/Navbar'
 
@@ -9,6 +10,8 @@ import Home from './components/Home';
 import Signin from './components/Auth/Signin'
 import Signup from './components/Auth/Signup'
 import AddStory from './components/Story/AddStory'
+import StoryPage from './components/Story/StoryPage'
+import UserProfile from './components/Profile/UserProfile'
 
 // wrapper session to check currentUser
 import withSession from './components/withSession'
@@ -21,6 +24,18 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { setContext } from 'apollo-link-context'
 
 import * as serviceWorker from './serviceWorker';
+
+if (localStorage.getItem('token')) {
+	// calculate current time
+	const currentTime = Date.now() / 1000
+	// decode the token from local storage
+	const decode = jwt_decode(localStorage.getItem('token'))
+
+	if (currentTime > decode.exp) {
+		localStorage.removeItem('token')
+	}
+}
+
 
 const httpLink = createHttpLink({
 	uri: 'http://localhost:5000/graphql'
@@ -54,7 +69,9 @@ const Root = ({ session, refetch }) => (
 				<Route exact path="/" component={Home} />
 				<Route path="/signin" render={() => <Signin refetch={refetch}/>} />
 				<Route path="/signup" render={() => <Signup refetch={refetch}/>} />
+				<Route path="/story/:id" component={StoryPage}/>
 				<Route path="/add-story" component={AddStory} />
+				<Route path="/profile" component={UserProfile} />
 			</Switch>
 		</Fragment>
 	</BrowserRouter>

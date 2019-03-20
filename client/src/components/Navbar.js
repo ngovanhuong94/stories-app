@@ -29,10 +29,13 @@ const AuthNavbar = () => (
 			<NavLink to="/search">Search</NavLink>
 		</li>
 		<li className="right">
+			<Signout />
+		</li>
+		<li className="right">
 			<NavLink to="/profile">Profile</NavLink>
 		</li>
 		<li className="right">
-			<Signout />
+			<NavLink to="/add-story">Add Story</NavLink>
 		</li>
 	</ul>
 )

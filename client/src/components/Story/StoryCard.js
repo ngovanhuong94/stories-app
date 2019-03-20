@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class StoryCard extends Component {
 
 	render () {
-		const { imageUrl, author, title, category } = this.props.story
+		const { imageUrl, author, title, category, id } = this.props.story
 		return (
 			<div className="card">
 				<img 
@@ -15,7 +16,7 @@ class StoryCard extends Component {
 				<p className="card-category">{category}</p>
 				<p>by <a href="/#">{author}</a></p>
 				<p>
-					<button className="card-button">View More</button>
+					<Link className="card-button" to={`/story/${id}`}>View More</Link>
 				</p>
 			</div>
 		)
