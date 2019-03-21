@@ -64,3 +64,19 @@ export const GET_FEED = gql`
 		}
 	}
 `
+
+
+export const GET_STORY = gql`
+	query getStoryQuery ($id: ID!) {
+		getStory (id: $id) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+		}
+	}
+`

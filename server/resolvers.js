@@ -34,6 +34,10 @@ exports.resolvers = {
 				cursor,
 				stories
 			}
+		},
+		getStory: async (root, { id }, { Story }) => {
+			const story = await Story.findById(id)
+			return story
 		}
 	},
 	Mutation: {

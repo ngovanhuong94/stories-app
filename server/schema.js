@@ -28,6 +28,7 @@ exports.typeDefs = `
 	type Query {
 		getCurrentUser: User
 		getFeed(cursor: String): Feed
+		getStory(id: ID!): Story
 	}
 
 	type Mutation {
