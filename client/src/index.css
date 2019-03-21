@@ -113,8 +113,33 @@ button {
 .heart-icon {
 	color: red;
 }
+
 .story-text { 
 	text-align: left;
+}
+
+
+
+.like-button {
+	display: inline-block;
+	width: 50px;
+	padding: 4px 8px;
+	border: none;
+	color: white;
+	background-color: #0000FF;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+
+.unlike-button {
+	display: inline-block;
+	width: 60px;
+	border: none;
+	background-color: #808000;
+	color: white;
+	padding: 4px 8px;
+	border-radius: 3px;
+	text-transform: uppercase;
 }
 @media screen and (max-width: 600px) {
 	ul.topnav li.right,

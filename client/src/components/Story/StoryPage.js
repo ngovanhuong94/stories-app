@@ -1,6 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import { GET_STORY } from '../../queries'
+import LikeStory from './LikeStory'
 
 const StoryPage = ({
 	match: {
@@ -27,6 +28,7 @@ const StoryPage = ({
 					</p>
 					<p>
 						{getStory.likes} <strong className="heart-icon">&#9825;</strong>
+						<LikeStory />
 					</p>
 				</div>
 

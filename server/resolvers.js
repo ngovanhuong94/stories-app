@@ -62,6 +62,50 @@ exports.resolvers = {
 
 			return newStory
 		},
+		likeStory: async (root, { id }, { currentUser, Story, User }) => {
+			// user not authorized
+			if (!currentUser) {
+				throw new Error('Unauthorized')
+			}
+
+			try { 
+				// find story and update
+				const story = await Story.findOneAndUpdate(
+					{ _id: id }, 
+					{ $inc: { likes: 1 }}
+				)
+				// find user and update
+				const user = await User.findOneAndUpdate(
+					{ username: currentUser.username },
+					{ $push: { favorites: id }}
+				)
+
+				return story 
+			} catch (err) {
+				console.log(err)
+			}
+		},
+		unlikeStory: async (root, { id }, {currentUser, Story, User}) => {
+			if (!currentUser) {
+				throw new Error('Unauthorized')
+			}
+
+			try {
+				// find story and update
+				const story = await Story.findOneAndUpdate(
+					{ _id: id },
+					{ $inc: { likes: -1 }}
+				)
+				// find user and update
+				const user = await User.findOneAndUpdate(
+					{ username: currentUser.username },
+					{ $pull: { favorites: id }}
+				)
+				return story 
+			} catch (err) {
+				console.log(err)
+			}
+		},
 		signupUser: async (root, { username, password, email }, { User }) => {
 			// find user with username
 			const user = await User.findOne({ username })

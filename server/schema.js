@@ -2,6 +2,7 @@ exports.typeDefs = `
 	type User {
 		username: String!
 		email: String!
+		favorites: [ID!]
 	}
 
 	type Story {
@@ -41,6 +42,8 @@ exports.typeDefs = `
 		): Story
 		signupUser(username: String!, password: String!, email: String!): Token!
 		signinUser(username: String!, password: String!): Token!
+		likeStory (id: ID!): Story
+		unlikeStory(id: ID!): Story
 	}
 
 `
