@@ -8,7 +8,7 @@ const Home = () => (
 	<div>
 		<Query query={GET_FEED}>
 			{({ loading, error, data, fetchMore }) => {
-				if (loading) return <div>Loading...</div>
+				if (loading || !data) return <div>Loading...</div>
 				const { cursor, stories } = data.getFeed
 				
 				return (

@@ -80,3 +80,33 @@ export const GET_STORY = gql`
 		}
 	}
 `
+
+export const LIKE_STORY = gql`
+	mutation likeStoryMutation ($id: ID!) {
+		likeStory (id: $id) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+		}
+	}
+`
+
+export const UNLIKE_STORY = gql`
+	mutation unlikeStoryMutation ($id: ID!) {
+		unlikeStory (id: $id) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+		}
+	}
+`

@@ -26,10 +26,10 @@ const StoryPage = ({
 					<p>
 						Created by <strong>{getStory.author}</strong>
 					</p>
-					<p>
+					<div>
 						{getStory.likes} <strong className="heart-icon">&#9825;</strong>
-						<LikeStory />
-					</p>
+						<LikeStory id={id}/>
+					</div>
 				</div>
 
 				<blockquote className="story-description">
