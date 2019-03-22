@@ -38,6 +38,10 @@ exports.resolvers = {
 		getStory: async (root, { id }, { Story }) => {
 			const story = await Story.findById(id)
 			return story
+		},
+		getUserStories: async (root, { username }, { Story }) => {
+			const stories = await Story.find({ author: username })
+			return stories
 		}
 	},
 	Mutation: {

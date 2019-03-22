@@ -24,18 +24,16 @@ class LikeStory extends Component {
 	}
 
 	handleLike = async (likeStory) => {
-		if (!this.state.like) {
+		if (!this.state.liked) {
 			const { data } = await likeStory()
-			console.log(data)
 			await this.props.refetch()
 			this.setState({ liked: !this.state.liked })
 		}
 	}
 
 	handleUnlike = async (unlikeStory) => {
-		if (this.state.like) {
+		if (this.state.liked) {
 			const { data } = await unlikeStory()
-			console.log(data)
 			await this.props.refetch()
 			this.setState({ liked: !this.state.liked })
 		}
@@ -76,7 +74,7 @@ class LikeStory extends Component {
 					? (<Mutation
 							mutation={UNLIKE_STORY}
 							variables={{ id }}
-							updateQuery={this.updateUnlike}
+							update={this.updateUnlike}
 						>
 						{unlikeStory => (
 							<span 
@@ -91,7 +89,7 @@ class LikeStory extends Component {
 						<Mutation 
 							mutation={LIKE_STORY}
 							variables={{ id }}
-							updateQuery={this.updateLike}
+							update={this.updateLike}
 						>
 							{likeStory => (
 								<span 

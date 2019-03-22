@@ -1,9 +1,13 @@
 import React from 'react'
-
+import UserInfo from './UserInfo'
+import UserStories from './UserStories'
 
 const UserProfile = () => (
-	<div>
-		This is profile page
+	<div className="Home">
+		<div className="center">
+			<UserInfo />
+			<UserStories />
+		</div>
 	</div>
 )
 

@@ -30,6 +30,7 @@ exports.typeDefs = `
 		getCurrentUser: User
 		getFeed(cursor: String): Feed
 		getStory(id: ID!): Story
+		getUserStories(username: String!): [Story]
 	}
 
 	type Mutation {
