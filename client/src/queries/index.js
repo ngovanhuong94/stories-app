@@ -21,6 +21,10 @@ export const GET_CURRENT_USER = gql`
 		getCurrentUser {
 			email
 			username
+			favorites {
+				id 
+				title
+			}
 		}
 	}
 `

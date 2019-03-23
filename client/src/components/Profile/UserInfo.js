@@ -1,17 +1,26 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-const UserInfo = () => (
+const UserInfo = ({ currentUser }) => (
 	<div>
 		<h2>User Profile</h2>
-		<p>Username: Huong</p>
-		<p>Email: huong@gmail.com</p>
+		<p>Username: {currentUser.username}</p>
+		<p>Email: {currentUser.email}</p>
 		<p>createdAt: 20.03.2019</p>
 		<ul>
-			<h5>Huong's favorites stories</h5>
-			<li>
-				<a href="#">my test title</a>
-			</li>
+			<h5>{currentUser.username}'s favorites stories</h5>
+			{ currentUser.favorites.length ? (
+				currentUser.favorites.map(story => (
+					<li key={story.id}>
+						<Link to={`/story/${story.id}`}>story.title</Link>
+					</li>
+				))
+			) :
+				<small>
+					<strong>{currentUser.username} doesn't have favorite story</strong>
+				</small>
+		}
 		</ul>
 	</div>
 )

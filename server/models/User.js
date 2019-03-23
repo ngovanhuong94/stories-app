@@ -16,7 +16,10 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
-	favorites: []
+	favorites: {
+		type: [Schema.Types.ObjectId],
+		ref: 'Story'
+	}
 })
 
 

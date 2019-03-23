@@ -71,7 +71,7 @@ const Root = ({ session, refetch }) => (
 				<Route path="/signup" render={() => <Signup refetch={refetch}/>} />
 				<Route path="/story/:id" component={StoryPage}/>
 				<Route path="/add-story" component={AddStory} />
-				<Route path="/profile" component={UserProfile} />
+				<Route path="/profile" render={() => <UserProfile session={session} />} />
 			</Switch>
 		</Fragment>
 	</BrowserRouter>

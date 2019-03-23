@@ -9,6 +9,10 @@ exports.resolvers = {
 				return null
 			}
 			const user = await User.findOne({ username: currentUser.username })
+									.populate({
+										path: 'favorites',
+										model: 'Story'
+									})
 			return user 
 		},
 		getFeed: async (root, { cursor }, { Story }) => {

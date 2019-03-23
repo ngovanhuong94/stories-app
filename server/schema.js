@@ -2,7 +2,7 @@ exports.typeDefs = `
 	type User {
 		username: String!
 		email: String!
-		favorites: [ID!]
+		favorites: [Story]
 	}
 
 	type Story {
