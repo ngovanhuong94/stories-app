@@ -85,7 +85,7 @@ exports.resolvers = {
 				// find user and update
 				const user = await User.findOneAndUpdate(
 					{ username: currentUser.username },
-					{ $push: { favorites: id }}
+					{ $addToSet: { favorites: id }}
 				)
 
 				return story 

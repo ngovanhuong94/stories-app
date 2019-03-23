@@ -145,6 +145,23 @@ button {
 	border-radius: 3px;
 	text-transform: uppercase;
 }
+
+
+.delete-button {
+	margin-left: 10px;
+	display: inline-block;
+	width: 50px;
+	background-color: #DC143C;
+	padding: 4px 8px;
+	color: white;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.story-link {
+	text-decoration: none;
+	color: #0000FF;
+}
 @media screen and (max-width: 600px) {
 	ul.topnav li.right,
 	ul.topnav li { float: none; }

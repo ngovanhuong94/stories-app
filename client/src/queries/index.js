@@ -29,31 +29,6 @@ export const GET_CURRENT_USER = gql`
 	}
 `
 
-
-export const ADD_STORY = gql`
-	mutation addStoryMutation(
-					$title: String!, 
-					$category: String!, 
-					$description: String!,
-					$text: String!,
-					$imageUrl: String!
-				) {
-		addStory (	title: $title,
-					description: $description,
-					text: $text,
-					imageUrl: $imageUrl,
-					category: $category ) {
-			title
-			description
-			imageUrl
-			category
-			text
-			author
-			createdAt
-		}
-	}
-`
-
 export const GET_FEED = gql`
 	query getFeedQuery ($cursor: String) {
 		getFeed (cursor: $cursor) {
@@ -84,6 +59,47 @@ export const GET_STORY = gql`
 		}
 	}
 `
+
+export const GET_USER_STORIES = gql`
+	query getUserStories ($username: String!) {
+		getUserStories (username: $username) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+		}
+	}
+`
+
+export const ADD_STORY = gql`
+	mutation addStoryMutation(
+					$title: String!, 
+					$category: String!, 
+					$description: String!,
+					$text: String!,
+					$imageUrl: String!
+				) {
+		addStory (	title: $title,
+					description: $description,
+					text: $text,
+					imageUrl: $imageUrl,
+					category: $category ) {
+			title
+			description
+			imageUrl
+			category
+			text
+			author
+			createdAt
+		}
+	}
+`
+
+
 
 export const LIKE_STORY = gql`
 	mutation likeStoryMutation ($id: ID!) {

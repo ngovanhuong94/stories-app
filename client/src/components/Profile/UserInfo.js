@@ -13,7 +13,7 @@ const UserInfo = ({ currentUser }) => (
 			{ currentUser.favorites.length ? (
 				currentUser.favorites.map(story => (
 					<li key={story.id}>
-						<Link to={`/story/${story.id}`}>story.title</Link>
+						<Link className="story-link" to={`/story/${story.id}`}>{story.title}</Link>
 					</li>
 				))
 			) :

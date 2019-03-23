@@ -9,7 +9,7 @@ class LikeStory extends Component {
 		liked: false 
 	}
 
-	componnetDidMount () {
+	componentDidMount () {
 		// have logged in user
 		if (this.props.session.getCurrentUser) {
 			// favorites posts array
