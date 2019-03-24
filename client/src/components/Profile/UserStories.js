@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { Link } from 'react-router-dom'
-import { GET_USER_STORIES } from '../../queries'
+import { GET_USER_STORIES, GET_FEED, DELETE_STORY, GET_CURRENT_USER } from '../../queries'
 
 class UserStories extends Component {
+	handleDeleteStory = async (deleteStory) => {
+		// show dialog 
+		const confirmDelete = window.confirm('Are you want to delete this story?')
+		// confirmed delete
+		if (confirmDelete) {
+			const { data } = await deleteStory()
+			return data
+		}
+	}
 	render () {
 		const { username } = this.props
 		return (
@@ -23,7 +32,38 @@ class UserStories extends Component {
 								<li key={story.id}>
 									<p>
 										<Link className="story-link" to={`/story/${story.id}`}>{story.title}</Link>
-										<span className="delete-button">Delete</span>
+										<Mutation
+											mutation={DELETE_STORY}
+											variables={{ id: story.id }}
+											refetchQueries={() => [
+												{ query: GET_FEED },
+												{ query: GET_CURRENT_USER }
+											]}
+											update={(cache, { data: { deleteStory }}) => {
+												const { getUserStories } = cache.readQuery({ 
+													query: GET_USER_STORIES ,
+													variables: { username}
+												})
+												cache.writeQuery({
+													query: GET_USER_STORIES,
+													variables: { username },
+													data: {
+														getUserStories: getUserStories.filter(
+															s => s.id !== deleteStory.id
+														)
+													}
+												})
+											}}
+										>
+											{(deleteStory) => (
+												<span
+													onClick={() => this.handleDeleteStory(deleteStory)} 
+													className="delete-button"
+												>
+													Delete
+												</span>
+											)}
+										</Mutation>
 									</p>
 								</li>
 							))

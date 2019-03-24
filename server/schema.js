@@ -41,6 +41,7 @@ exports.typeDefs = `
 			category: String!
 			text: String!
 		): Story
+		deleteStory(id: ID!): Story
 		signupUser(username: String!, password: String!, email: String!): Token!
 		signinUser(username: String!, password: String!): Token!
 		likeStory (id: ID!): Story

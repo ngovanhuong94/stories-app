@@ -99,6 +99,20 @@ export const ADD_STORY = gql`
 	}
 `
 
+export const DELETE_STORY = gql`
+	mutation deleteStoryMutation ($id: ID!) {
+		deleteStory (id: $id) {
+			title
+			description
+			imageUrl
+			category
+			text
+			author
+			createdAt
+		}
+	}
+`
+
 
 
 export const LIKE_STORY = gql`

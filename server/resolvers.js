@@ -70,6 +70,24 @@ exports.resolvers = {
 
 			return newStory
 		},
+		deleteStory: async (root, { id }, { currentUser, Story, User }) => {
+			// user unauthorizaed
+			if (!currentUser) {
+				throw new Error('Unauthorized')
+			}
+			
+			const story = await Story.findById(id)
+			if (!story) {
+				throw new Error('Story not found')
+			}
+			// user not author of story
+			if (story.author !== currentUser.username) {
+				throw new Error("Can't delete this story")
+			}
+
+			await story.remove()
+			return story
+		},
 		likeStory: async (root, { id }, { currentUser, Story, User }) => {
 			// user not authorized
 			if (!currentUser) {
