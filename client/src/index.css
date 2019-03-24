@@ -107,7 +107,9 @@ button {
 	text-decoration: none;
 }
 
-
+.card p {
+	line-height: 0.5;
+}
 
 .center {
 	text-align: center;
@@ -138,6 +140,7 @@ button {
 	background-color: #0000FF;
 	border-radius: 3px;
 	text-transform: uppercase;
+	cursor: pointer;
 }
 
 .unlike-button {
@@ -149,6 +152,7 @@ button {
 	padding: 4px 8px;
 	border-radius: 3px;
 	text-transform: uppercase;
+	cursor: pointer;
 }
 
 

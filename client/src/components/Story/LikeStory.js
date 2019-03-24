@@ -28,6 +28,7 @@ class LikeStory extends Component {
 			const { data } = await likeStory()
 			await this.props.refetch()
 			this.setState({ liked: !this.state.liked })
+			return data
 		}
 	}
 
@@ -36,6 +37,7 @@ class LikeStory extends Component {
 			const { data } = await unlikeStory()
 			await this.props.refetch()
 			this.setState({ liked: !this.state.liked })
+			return data
 		}
 	}
 

@@ -17,6 +17,11 @@ const Story = require('./models/Story')
 dotenv.config()
 
 // connect MongoDB
+mongoose.Promise = global.Promise
+mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true)
+mongoose.set('useNewUrlParser', true)
+
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
 	.then(() => console.log('MongoDB connected'))
 	.catch((err) => console.log(err))

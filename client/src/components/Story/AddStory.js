@@ -37,7 +37,7 @@ class AddStory extends Component {
 	async handleSubmit (e, addStory) {
 		e.preventDefault()
 		// run the mutation
-		const { data } = await addStory()
+		await addStory()
 		// redirect to home page
 		this.props.history.push('/')
 	}
