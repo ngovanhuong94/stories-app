@@ -46,6 +46,22 @@ exports.resolvers = {
 		getUserStories: async (root, { username }, { Story }) => {
 			const stories = await Story.find({ author: username })
 			return stories
+		},
+		searchStories: async (root, { searchText }, { Story }) => {
+			let stories
+			if (searchText) {
+				stories = await Story.find({
+					$text: { $search: searchText }  
+				})
+				.sort({ createdAt: -1, likes: 'desc' })
+				.exec()
+			} else {
+				stories = await Story.find({})
+							.limit(10)
+							.sort({ createdAt: -1, likes: 'desc' })
+							.exec()
+			}
+			return stories
 		}
 	},
 	Mutation: {

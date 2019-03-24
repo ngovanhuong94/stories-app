@@ -71,6 +71,23 @@ export const GET_USER_STORIES = gql`
 			text
 			createdAt
 			likes
+			author
+		}
+	}
+`
+
+export const SEARCH_STORIES = gql`
+	query searchStoriesQuery ($searchText: String) {
+		searchStories(searchText: $searchText) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+			author
 		}
 	}
 `

@@ -38,5 +38,6 @@ const storySchema = new Schema({
 	}
 })
 
+storySchema.index({'$**': 'text'})
 
 module.exports = mongoose.model('Story', storySchema)

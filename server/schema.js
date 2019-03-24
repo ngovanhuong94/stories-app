@@ -31,6 +31,7 @@ exports.typeDefs = `
 		getFeed(cursor: String): Feed
 		getStory(id: ID!): Story
 		getUserStories(username: String!): [Story]
+		searchStories(searchText: String): [Story]
 	}
 
 	type Mutation {
