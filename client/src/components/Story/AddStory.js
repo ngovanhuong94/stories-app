@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
 import withAuth from '../withAuth'
-import { ADD_STORY, GET_FEED, GET_CURRENT_USER } from '../../queries'
+import { ADD_STORY, GET_FEED, GET_USER_STORIES } from '../../queries'
 import Error from '../Error'
 
 class AddStory extends Component {
@@ -50,20 +50,21 @@ class AddStory extends Component {
 
 	render () {
 		const { title, description, imageUrl, category, text } = this.state
+		const { username } = this.props.session.getCurrentUser 
 		return (
 			<div className="App">
 				<Mutation
 					mutation={ADD_STORY}
 					variables={{...this.state}}
 					refetchQueries={() => [
-						{ query: GET_CURRENT_USER }
+						{ query: GET_USER_STORIES, variables: { username } }
 					]}
-					updateQuery={(InMemoryCache, {data: { addStory }}) => {
+					update={(InMemoryCache, {data: { addStory }}) => {
 						const { getFeed } = InMemoryCache.readQuery({ query: GET_FEED })
 
 						const stories = getFeed.stories
 						const newStories = [addStory, ...stories]
-
+						
 						InMemoryCache.writeQuery({
 							query: GET_FEED,
 							data: {

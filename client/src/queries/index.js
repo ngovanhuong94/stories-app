@@ -88,6 +88,7 @@ export const ADD_STORY = gql`
 					text: $text,
 					imageUrl: $imageUrl,
 					category: $category ) {
+			id
 			title
 			description
 			imageUrl
@@ -102,6 +103,7 @@ export const ADD_STORY = gql`
 export const DELETE_STORY = gql`
 	mutation deleteStoryMutation ($id: ID!) {
 		deleteStory (id: $id) {
+			id
 			title
 			description
 			imageUrl
