@@ -47,6 +47,16 @@ exports.resolvers = {
 			const stories = await Story.find({ author: username })
 			return stories
 		},
+		getStoriesByCategory: async (root, { category }, { Story }) => {
+			try {
+				const stories = await Story.find({ category: category })
+											.sort({ createdAt: -1 , likes: 'desc'})
+											.exec()
+				return stories
+			} catch (error) {
+				throw new Error('Something went wrong')
+			}
+		}, 
 		searchStories: async (root, { searchText }, { Story }) => {
 			let stories
 			if (searchText) {

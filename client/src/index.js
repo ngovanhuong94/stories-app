@@ -13,6 +13,9 @@ import AddStory from './components/Story/AddStory'
 import StoryPage from './components/Story/StoryPage'
 import UserProfile from './components/Profile/UserProfile'
 import SearchStory from './components/Story/SearchStory'
+import StoriesByUsername from './components/Story/StoriesByUsername'
+import StoriesByCategory from './components/Story/StoriesByCategory'
+
 // wrapper session to check currentUser
 import withSession from './components/withSession'
 
@@ -70,6 +73,8 @@ const Root = ({ session, refetch }) => (
 				<Route path="/signin" render={() => <Signin refetch={refetch}/>} />
 				<Route path="/signup" render={() => <Signup refetch={refetch}/>} />
 				<Route path="/story/:id" component={StoryPage}/>
+				<Route path="/user/:username" component={StoriesByUsername} />
+				<Route path="/category/:category" component={StoriesByCategory} />
 				<Route path="/add-story" render={() => <AddStory session={session} />} />
 				<Route path="/profile" render={() => <UserProfile session={session} />} />
 				<Route path="/search" component={SearchStory} />

@@ -38,6 +38,7 @@ export const GET_FEED = gql`
 				title
 				imageUrl
 				category
+				likes
 				author
 			}
 		}
@@ -63,6 +64,21 @@ export const GET_STORY = gql`
 export const GET_USER_STORIES = gql`
 	query getUserStories ($username: String!) {
 		getUserStories (username: $username) {
+			id
+			title
+			imageUrl
+			description
+			category
+			text
+			createdAt
+			likes
+			author
+		}
+	}
+`
+export const GET_STORIES_BY_CATEGORY = gql`
+	query getStoriesByCategoryQuery ($category: String!) {
+		getStoriesByCategory (category: $category) {
 			id
 			title
 			imageUrl

@@ -37,7 +37,10 @@ ul.topnav li.right { float: right; }
 ul {
 	list-style: none;
 }
-
+a {
+	text-decoration: none;
+	color: #0000FF;
+}
 input, select, textarea {
 	width: 600px;
 	padding: 6px 12px;
@@ -103,6 +106,8 @@ button {
 	border-radius: 0;
 	text-decoration: none;
 }
+
+
 
 .center {
 	text-align: center;
